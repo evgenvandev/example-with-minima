@@ -49,7 +49,7 @@ author: Evgeny
 
 [demo.getpoole.com](http://demo.getpoole.com/) &mdash; рабочее демо блога:
 
-![The demo pool website](/assets/images/71ae4048-73db-11e3-9a3c-df38eb170537.png)
+![The demo pool website](/example-with-minima/assets/images/71ae4048-73db-11e3-9a3c-df38eb170537.png)
 
 #### Приступим к созданию своего блога:
 
