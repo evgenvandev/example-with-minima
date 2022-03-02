@@ -12,6 +12,6 @@ div.post-content > #markdown-toc {position:fixed;top:80px;left:70%;max-width:320
 div.post-content > #markdown-toc {list-style:none;padding-left:0;margin-left:0;}
 div.home > #markdown-toc {position:fixed;top:80px;left:70%;max-width:320px}
 div.home > #markdown-toc {list-style:none;padding-left:0;margin-left:0;}
-div.wrapper {max-width:960px;margin-left:5%;}
+div.wrapper-sidebar {max-width:960px;margin-left:5%;}
 div.post-content > p {width:80%;max-width:960;}
-table,hr,p,div.highlight {width:80%;max-width:960;}
+table,hr,p,li,figure.highlight,div.highlight {width:80%;max-width:960;}

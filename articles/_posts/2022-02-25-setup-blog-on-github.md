@@ -7,6 +7,9 @@ tags: [github, github-pages, jekyll]
 author: Evgeny
 ---
 
+* TOC
+{:toc}
+
 Первый пост блога, инструкция.
 
 ["Оригинал статьи"](http://alexprivalov.org/setup-blog-on-github/ "Оригинал статьи")
