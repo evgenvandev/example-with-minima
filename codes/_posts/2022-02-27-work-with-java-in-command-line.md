@@ -7,6 +7,9 @@ tags: [java, command_line]
 author: Evgeny
 ---
 
+* TOC
+{:toc}
+
 [Оригинал статьи с Habr](https://habr.com/ru/post/125210/ "Оригинал статьи с Habr") от 29 июля 2011 года. <br>(Qwertovsky) Валерий Квертовский (Full-Stack Software Engineer) <br>сайт [https://www.qwertovsky.com](https://www.qwertovsky.com "личный сайт") <br>[GitHub](https://github.com/Qwertovsky "на GitHub")
 
 ---
