@@ -18,6 +18,7 @@ author: Evgeny
 - [Отделяем бинарные файлы от исходников](#otdelyaem_binarnye_faily_ot_ishodnikov)
 - [Используем пакеты](#ispolzuem_pakety)
 - [Если в программе несколько файлов](#esli_v_programme_neskolko_faylov)
+- [Если удивляет результат](#esli_udivlyaet_rezultat)
 
 ---
 
@@ -171,3 +172,139 @@ public class Adder {
 ```
 javac -encoding utf-8 -d bin src/com/qwertovsky/helloworld/HelloWorld.java
 ```
+
+!["Ошибка"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-2.jpg "cannot find class Calculator")
+
+Ошибка возникла из-за того, что для компиляции нужны файлы с исходными кодами классов, которые используютя (класс Calculator). Надо указать компилятору каталог с файлами с помощью ключа `-sourcepath`. <br>Компилируем:
+
+```
+javac -encoding utf-8 -sourcepath ./src -d bin src/com/qwertovsky/helloworld/HelloWorld.java
+```
+
+Запускаем:
+
+```
+java -classpath ./bin com.qwertovsky.helloworld.HelloWorld
+```
+
+!["Выполнение программы"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-3.jpg "run HelloWorld")
+
+## Если удивляет результат  {#esli_udivlyaet_rezultat}
+
+Есть возможность запустить отладчик. Для этого существует `jdb`. <br>Сначала компилируем с ключом `-g`, чтобы у отладчика была информация.
+
+```
+javac -encoding utf-8 -g -sourcepath ./src -d bin src/com/qwertovsky/helloworld/HelloWorld.java
+```
+
+Запускаем отладчик:
+
+```
+jdb -classpath bin -sourcepath src com.qwertovsky.helloworld.HelloWorld
+```
+
+!["Запуск отладчика"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-4.jpg "run jdb")
+
+Отладчик запускает свой внутренний терминал для ввода команд. Справку по последним можно вывести с помощью команды `help`. <br>Указываем точку прерывания на 7 строке в классе Calculator:
+
+```
+stop at com.qwertovsky.helloworld.Calculator:7
+```
+
+!["Точка прерывания на 7 строке"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-5.jpg "stop on 7 of string")
+
+Запускаем на выполнение:
+
+```
+run
+```
+
+!["Запуск на выполнение"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-6.jpg "run with jdb")
+
+Чтобы соориентироваться можно вывести кусок исходного кода, где в данный момент находится курсор:
+
+```
+list
+```
+
+!["Вывод куска кода с курсором"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-7.jpg "out code_src with cursor")
+
+Узнаем, что из себя представляет переменная a:
+
+```
+print a
+```
+
+!["тип переменной a"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-8.jpg "type of variable a")
+
+Значение переменной a:
+
+```
+dump a
+```
+
+!["значение переменной a"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-9.jpg "value of variable a")
+
+Указываем точку прерывания на 15 строке в классе Adder:
+
+```
+stop at com.qwertovsky.helloworld.operation.Adder:15
+```
+
+!["Точка прерывания на 15 строке"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-10.jpg "stop on 15 of string class Adder")
+
+Продолжим исполнение:
+
+```
+cont
+```
+
+!["Продолжим выполнение"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-11.jpg "continue execution")
+
+Выполним код в текущей строке и увидим, что sum стала равняться 2:
+
+```
+step
+```
+
+!["изменение значения переменной sum"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-12.jpg "change the value of variable sum")
+
+Поднимемся из класса Adder в вызвавший его класс Calculator:
+
+```
+step up
+```
+
+!["из класса Adder в класс Calculator"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-13.jpg "go from class Adder to class Calculator")
+
+Удаляем точку прерывания:
+
+```
+clear com.qwertovsky.helloworld.operation.Adder:15
+```
+
+!["удаляем точку прерывания в классе Adder"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-14.jpg "delete breakpoint in class Adder")
+
+Выполним код в текущей строке:
+
+```
+step
+```
+
+!["выполним код в текущей строке"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-15.jpg "run code in current line")
+
+Можно избежать захода в методы, используя команду:
+
+```
+next
+```
+
+!["не заходим в методы"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-16.jpg "not enter to metods")
+
+Проверяем значение выражения и завершаем выполнение:
+
+```
+eval adder.getSum()
+```
+
+!["проверка значения выражения"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-17.jpg "equal value expression")
