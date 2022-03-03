@@ -22,6 +22,7 @@ author: Evgeny
 - [Используем пакеты](#ispolzuem_pakety)
 - [Если в программе несколько файлов](#esli_v_programme_neskolko_faylov)
 - [Если удивляет результат](#esli_udivlyaet_rezultat)
+- [Хорошо бы протестировать](#horosho_by_protestirovat)
 
 ---
 
@@ -311,3 +312,40 @@ eval adder.getSum()
 ```
 
 !["проверка значения выражения"]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-17.jpg "equal value expression")
+
+## Хорошо бы протестировать  {#horosho_by_protestirovat}
+
+Используем JUnit.
+
+_TestCalculator.java_
+```java
+package com.qwertovsky.helloworld;
+
+import static org.junit.Assert.*;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized.Parameters;
+
+@RunWith(value=org.junit.runners.Parameterized.class)
+public class TestCalculator {
+	int expected;
+	int[] arg;
+	
+	@Parameters
+	public static Collection<int[][]> parameters() {
+		return Arrays.asList(new int[][][]{
+			
+			
+		});
+	}
+}
+```
+
+## Исходные файлы  {#Ishodnye_faily}
+
+[Исходные файлы]({{ site.url }}{{ site.baseurl }}/assets/source_code/Example-2_Rabota_s_Java_v_komandnoy_stroke.rar "source_code_example")
+
