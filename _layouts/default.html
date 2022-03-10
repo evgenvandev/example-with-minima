@@ -8,9 +8,14 @@
     {%- include header.html -%}
 
     <main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        {{ content }}
-      </div>
+	  {% if page.show_sidebar == true %}
+	    {% assign class_wrapper = "wrapper-sidebar" %}
+	  {% else %}
+	    {% assign class_wrapper = "wrapper" %}
+	  {% endif %}
+	  <div class={{ class_wrapper }}>
+	    {{ content }}
+	  </div>
     </main>
 
     {%- include footer.html -%}

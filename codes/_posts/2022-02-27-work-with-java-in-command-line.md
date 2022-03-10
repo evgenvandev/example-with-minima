@@ -5,6 +5,7 @@ date: 2022-02-27 11:43:51 +0000
 categories: java command_line
 tags: [java, command_line]
 author: Evgeny
+show_sidebar: true
 ---
 
 * TOC
@@ -352,7 +353,7 @@ public class TestCalculator {
 	
 	@Test
 	public void testSum() {
-		Calculator c = new Calcilator();
+		Calculator c = new Calculator();
 		assertEquals(expected, c.sum(arg));
 	}
 }

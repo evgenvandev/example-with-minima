@@ -1,10 +1,11 @@
 ---
-layout: post-share
+layout: post
 title:  Как поднять блог на Github Pages
 date:   2022-02-25 14:21:01 +0500
 categories: jekyll update
 tags: [github, github-pages, jekyll]
 author: Evgeny
+show_sidebar: true
 ---
 
 * TOC
