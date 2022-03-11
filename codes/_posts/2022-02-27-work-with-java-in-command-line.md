@@ -24,6 +24,7 @@ show_sidebar: true
 - [Если в программе несколько файлов](#esli_v_programme_neskolko_faylov)
 - [Если удивляет результат](#esli_udivlyaet_rezultat)
 - [Хорошо бы протестировать](#horosho_by_protestirovat)
+- [Создадим библиотеку](#sozdadim_biblioteku)
 
 ---
 
@@ -101,10 +102,10 @@ HelloWorld
 '           '---helloworld
 '               '---HelloWorld.class
 '---src
-'   '---com
-'       '---qwertovsky
-'           '---helloworld
-'               '---HelloWorld.java
+    '---com
+        '---qwertovsky
+            '---helloworld
+                '---HelloWorld.java
 ```
 
 Запускаем:
@@ -359,7 +360,153 @@ public class TestCalculator {
 }
 ```
 
+Создаём структуру папок для файлов тестирования `test/com/qwertovsky/helloworld` и помещаем туда файл `TestCalculator.java`.<br>
+Создаём папку `lib` в директории проекта. В папку `lib` помещаем `jar` файлы библиотеки JUnit - это файлы `junit-4.12.jar`, `hamcrest-all-1.3.jar`.<br>
+Получится следующая структура каталогов:
+
+```
+HelloWorld
+'---bin
+'   '---com
+'       '---qwertovsky
+'           '---helloworld
+'               '---HelloWorld.class
+'               '---Calculator.class
+'               '---operation
+'                   '---Adder.class
+'---lib
+'   '---junit-4.12.jar
+'   '---hamcrest-all-1.3.jar
+'---src
+'   '---com
+'       '---qwertovsky
+'           '---helloworld
+'               '---HelloWorld.java
+'               '---Calculator.java
+'               '---operation
+'                   '---Adder.java
+'---test
+    '---com
+        '---qwertovsky
+            '---helloworld
+                '---TestCalculator.java
+```
+В качестве разделителя нескольких путей в `classpath` в Windows используется `;`, в Linux - `:`. В консоли Cygwin не работают оба разделителя. Возможно, должен работать `;`, но он воспринимается, как разделитель команд.<br>
+Создаём папку `test_bin` и компилируем:
+
+```
+mkdir test_bin
+javac -encoding utf-8 -classpath ./lib/junit-4.12.jar;./lib/hamcrest-all-1.3.jar -sourcepath ./src -d test_bin test/com/qwertovsky/helloworld/TestCalculator.java
+```
+
+Получаем структуру каталогов:
+
+```
+HelloWorld
+'---bin
+'   '---com
+'       '---qwertovsky
+'           '---helloworld
+'               '---HelloWorld.class
+'               '---Calculator.class
+'               '---operation
+'                   '---Adder.class
+'---lib
+'   '---junit-4.12.jar
+'   '---hamcrest-all-1.3.jar
+'---src
+'   '---com
+'       '---qwertovsky
+'           '---helloworld
+'               '---HelloWorld.java
+'               '---Calculator.java
+'               '---operation
+'                   '---Adder.java
+'---test
+'   '---com
+'       '---qwertovsky
+'           '---helloworld
+'               '---TestCalculator.java
+'---test_bin
+    '---com
+        '---qwertovsky
+            '---helloworld
+                '---HelloWorld.class
+                '---Calculator.class
+                '---operation
+                    '---Adder.class
+```
+
+Запускаем:
+
+```
+java -classpath ./lib/junit-4.12.jar;./lib/hamcrest-all-1.3.jar;./test_bin org.junit.runner.JUnitCore com.qwertovsky.helloworld.TestCalculator
+```
+
+![тестируем класс Calculator]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-18.jpg "test class Calculator")
+
+[Исходные файлы без библиотеки calculator.jar]({{ site.url }}{{ site.baseurl }}/assets/source_code/Example-2_Rabota_s_Java_v_komandnoy_stroke.rar "source_code_example_without_library_calculator.jar")
+
+## Создадим библиотеку {#sozdadim_biblioteku}
+
+Класс Calculator оказался полезным и может быть использован во многих проектах. Перенесём всё, что касается класса Calculator в отдельный проект.
+
+```
+HelloWorld
+'---bin
+'---src
+    '---com
+        '---qwertovsky
+            '---helloworld
+                '---HelloWorld.java
+Calculator
+'---bin
+'---src
+'   '---com
+'       '---qwertovsky
+'           '---calculator
+'               '---Calculator.java
+'               '---operation
+'                   '---Adder.java
+'---test
+    '---com
+        '---qwertovsky
+            '---calculator
+                '---TestCalculator.java
+```
+
+Изменяем названия пакетов в исходных текстах проекта Calculator на `com.qwertovsky.calculator`.<br> В HelloWorld.java импортируем класс Calculator, для этого нужно будет добавить строку
+
+```java
+import com.qwertovsky.calculator.Calculator;
+```
+
+Сейчас находимся в корне проекта:
+
+![находимся в корне проекта]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-19.jpg "root_folder")
+
+Переходим в папку Calculator и компилируем:
+
+```
+cd Calculator
+javac -encoding utf-8 -sourcepath src -d bin src/com/qwertovsky/calculator/Calculator.java
+```
+
+Создаём файл архив `calculator.jar`, командой:
+
+```
+jar cvf calculator.jar -C bin .
+```
+
+С помощью ключа `-C` мы запустили программу `jar` в каталоге `bin`.
+
+![создание архива calculator.jar]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-20.jpg "create_archive_calculator_jar")
+
+В итоге создаётся файл архива `calculator.jar` в папке Calculator:
+
+![создали архив calculator.jar]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-21.jpg "created_of_archive_calculator_jar")
+
 ## Исходные файлы  {#Ishodnye_faily}
 
-[Исходные файлы]({{ site.url }}{{ site.baseurl }}/assets/source_code/Example-2_Rabota_s_Java_v_komandnoy_stroke.rar "source_code_example")
+[Исходные файлы с библиотекой calculator.jar]({{ site.url }}{{ site.baseurl }}/assets/source_code/Example-2_Rabota_s_Java_v_komandnoy_stroke_with_library.rar "source_code_example_with_library_calculator.jar")
 
