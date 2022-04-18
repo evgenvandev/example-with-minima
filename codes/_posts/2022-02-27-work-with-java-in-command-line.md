@@ -25,6 +25,7 @@ show_sidebar: true
 - [Если удивляет результат](#esli_udivlyaet_rezultat)
 - [Хорошо бы протестировать](#horosho_by_protestirovat)
 - [Создадим библиотеку](#sozdadim_biblioteku)
+- [Надо узнать, что у библиотеки внутри](#Nado_uznat_chto_u_biblioteki_vnutri)
 
 ---
 
@@ -505,6 +506,16 @@ jar cvf calculator.jar -C bin .
 В итоге создаётся файл архива `calculator.jar` в папке Calculator:
 
 ![создали архив calculator.jar]({{ site.url }}{{ site.baseurl }}/assets/images/codes/work-with-java-in-command-line-21.jpg "created_of_archive_calculator_jar")
+
+## Надо узнать, что у библиотеки внутри {#Nado_uznat_chto_u_biblioteki_vnutri}
+
+Можно распаковать архив zip-распаковщиком и посмотреть, какие классы есть в библиотеке. <br>Информацию о любом классе можно получить с помощью дизассемблера `javap`. <br>Получим информацию о классе `com.qwertovsky.calculator.Calculator`.
+
+```
+javap -c -classpath calculator.jar com.qwertovsky.calculator.Calculator
+```
+
+
 
 ## Исходные файлы  {#Ishodnye_faily}
 
